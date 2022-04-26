@@ -24,7 +24,7 @@ public abstract class NoteRoomDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             databaseWriteExecutor.execute(()->{
-                NoteDao noteDao = INSTANCE.notedao();
+                NoteDao noteDao = INSTANCE.noteDao();
                 noteDao.deleteAllNote();
             });
         }
@@ -43,6 +43,6 @@ public abstract class NoteRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    protected abstract NoteDao notedao();
+    public abstract NoteDao noteDao();
 
 }
