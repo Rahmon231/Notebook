@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface NoteDao {
     @Insert
-    void insertNote(Note note);
+    void insertNote();
 
     @Query("DELETE FROM notebook_table")
     void deleteAllNote();
