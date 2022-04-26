@@ -23,7 +23,7 @@ public class NoteRepository {
         return allNotes;
     }
 
-    public void insertTask(Note note){
+    public void insertNote(Note note){
         NoteRoomDatabase.databaseWriteExecutor.execute(()->{
             noteDao.insertNote(note);
         });
@@ -35,17 +35,17 @@ public class NoteRepository {
         });
     }
 
-    public void deleteTask(Note note){
+    public void deleteNote(Note note){
         NoteRoomDatabase.databaseWriteExecutor.execute(()->{
             noteDao.deleteNote(note);
         });
     }
 
-    public LiveData<Note> getTask(long id){
+    public LiveData<Note> getNote(long id){
         return noteDao.getNote(id);
     }
 
-    public void updateTask(Note note){
+    public void updateNote(Note note){
         NoteRoomDatabase.databaseWriteExecutor.execute(()->{
             noteDao.updateNote(note);
         });

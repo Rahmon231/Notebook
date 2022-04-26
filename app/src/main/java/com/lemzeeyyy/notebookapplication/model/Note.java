@@ -10,6 +10,7 @@ import com.lemzeeyyy.notebookapplication.util.TimeConverter;
 import java.sql.Timestamp;
 @Entity(tableName = "notebook_table")
 public class Note {
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_id")
     public long noteId;
@@ -24,8 +25,7 @@ public class Note {
     @TypeConverters(TimeConverter.class)
     public Timestamp timestamp;
 
-    public Note(long noteId, String noteTitle, String noteDescription, Timestamp timestamp) {
-        this.noteId = noteId;
+    public Note(String noteTitle, String noteDescription, Timestamp timestamp) {
         this.noteTitle = noteTitle;
         this.noteDescription = noteDescription;
         this.timestamp = timestamp;
