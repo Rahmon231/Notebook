@@ -11,5 +11,7 @@
     <dimen name="top_margin">6dp</dimen>
     <dimen name="recycler_padding">16dp</dimen>
     <dimen name="radio_padding">6dp</dimen>
+    <dimen name="elevation">12dp</dimen>
+    <dimen name="general_padding">16dp</dimen>
 
 </resources>
