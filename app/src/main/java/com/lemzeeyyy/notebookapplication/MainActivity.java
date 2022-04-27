@@ -1,27 +1,36 @@
 package com.lemzeeyyy.notebookapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lemzeeyyy.notebookapplication.adapter.OnNoteClickListener;
 import com.lemzeeyyy.notebookapplication.adapter.RecyclerViewAdapter;
 import com.lemzeeyyy.notebookapplication.model.Note;
 import com.lemzeeyyy.notebookapplication.model.NoteViewModel;
 
 import java.sql.Timestamp;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnNoteClickListener {
+    public static final String NOTE_TITLE = "note_title";
+    public static final String NOTE_DESCRIPTION = "note_description";
+    private static final int START_ACTIVITY_REQUEST_CODE = 1;
     private NoteViewModel noteViewModel;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter viewAdapter;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -44,9 +54,29 @@ public class MainActivity extends AppCompatActivity {
 
         noteViewModel.getAllNotes().observe(this, notes -> {
             // Log.d("TAG", "onCreate: "+notes);
-            viewAdapter = new RecyclerViewAdapter(notes);
+            viewAdapter = new RecyclerViewAdapter(notes,this);
             recyclerView.setAdapter(viewAdapter);
         });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UpdateNote.class);
+                startActivityForResult(intent,START_ACTIVITY_REQUEST_CODE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == START_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            String noteTitle = data.getStringExtra(NOTE_TITLE);
+            String noteDescr = data.getStringExtra(NOTE_DESCRIPTION);
+            Note note = new Note(noteTitle,noteDescr,timestamp);
+            NoteViewModel.insertNote(note);
+        }
+
     }
 
     @Override
@@ -58,5 +88,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onNoteClick(int position, Note note) {
+        Log.d("TAG", "onNoteClick: "+note.getNoteTitle());
+        Intent intent = new Intent(MainActivity.this, UpdateNote.class);
+        intent.putExtra(NOTE_TITLE,note.getNoteTitle());
+        intent.putExtra(NOTE_DESCRIPTION,note.getNoteDescription());
+        startActivity(intent);
     }
 }

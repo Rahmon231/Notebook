@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23958333333333334" />
+        <entry key="app/src/main/res/layout/activity_update_note.xml" value="0.1" />
         <entry key="app/src/main/res/layout/note_row.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_settings.xml" value="0.1" />
       </map>
