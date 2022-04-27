@@ -6,12 +6,12 @@
     <dimen name="dimen_10">10dp</dimen>
     <dimen name="dimen_8">8dp</dimen>
     <dimen name="dimen_16">16dp</dimen>
-    <dimen name="dimen_32">32dp</dimen>
-    <dimen name="dimen_60">60dp</dimen>
+    <dimen name="dimen_50">32dp</dimen>
+    <dimen name="dimen_55">55dp</dimen>
     <dimen name="top_margin">6dp</dimen>
-    <dimen name="recycler_padding">16dp</dimen>
+    <dimen name="recycler_padding">5dp</dimen>
     <dimen name="radio_padding">6dp</dimen>
-    <dimen name="elevation">12dp</dimen>
-    <dimen name="general_padding">16dp</dimen>
-
+    <dimen name="elevation">6dp</dimen>
+    <dimen name="general_padding">5dp</dimen>
+    <dimen name="general_margin">5dp</dimen>
 </resources>

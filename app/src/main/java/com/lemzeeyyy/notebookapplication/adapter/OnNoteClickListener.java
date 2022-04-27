@@ -1,2 +1,4 @@
-package com.lemzeeyyy.notebookapplication.adapter;public interface OnNoteClickListener {
+package com.lemzeeyyy.notebookapplication.adapter;
+
+public interface OnNoteClickListener {
 }
