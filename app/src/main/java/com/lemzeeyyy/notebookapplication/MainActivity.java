@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements OnNoteClickListen
     public static final String NOTE_TITLE = "note_title";
     public static final String NOTE_DESCRIPTION = "note_description";
     private static final int START_ACTIVITY_REQUEST_CODE = 1;
+    public static final String NOTE_ID = "note_id";
     private NoteViewModel noteViewModel;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter viewAdapter;
@@ -94,8 +95,7 @@ public class MainActivity extends AppCompatActivity implements OnNoteClickListen
     public void onNoteClick(int position, Note note) {
         Log.d("TAG", "onNoteClick: "+note.getNoteTitle());
         Intent intent = new Intent(MainActivity.this, UpdateNote.class);
-        intent.putExtra(NOTE_TITLE,note.getNoteTitle());
-        intent.putExtra(NOTE_DESCRIPTION,note.getNoteDescription());
+        intent.putExtra(NOTE_ID,note.getId());
         startActivity(intent);
     }
 }

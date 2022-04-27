@@ -25,6 +25,9 @@ public class Note {
     @TypeConverters(TimeConverter.class)
     public Timestamp timestamp;
 
+    public Note() {
+    }
+
     public Note(String noteTitle, String noteDescription, Timestamp timestamp) {
         this.noteTitle = noteTitle;
         this.noteDescription = noteDescription;

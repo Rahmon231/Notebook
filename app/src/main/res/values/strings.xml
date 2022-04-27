@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Notebook Application</string>
     <string name="action_settings">About</string>
+    <string name="empty">Field Empty</string>
 </resources>
