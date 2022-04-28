@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,8 +21,9 @@ import java.sql.Timestamp;
 public class UpdateNote extends AppCompatActivity {
     private EditText note_title;
     private EditText note_description;
-    private int noteId = 0;
+    private long noteId = 0;
     private Button save_note_btn;
+    private Boolean isUpdate = false;
     private Button update_note_btn;
     private NoteViewModel noteViewModel;
 
@@ -38,13 +40,16 @@ public class UpdateNote extends AppCompatActivity {
                 .getApplication())
                 .create(NoteViewModel.class);
         if (getIntent().hasExtra(MainActivity.NOTE_ID)) {
-            noteId = getIntent().getIntExtra(MainActivity.NOTE_ID, 0);
+            noteId = getIntent().getLongExtra(MainActivity.NOTE_ID, 0);
+            Log.d("noteId", "onCreate: "+noteId);
             noteViewModel.getNote(noteId).observe(this, note -> {
                 if (note != null) {
                     note_title.setText(note.getNoteTitle());
                     note_description.setText(note.getNoteDescription());
                 }
             });
+            isUpdate = true;
+        }
 
             save_note_btn.setOnClickListener(view -> {
                 Intent replyIntent = getIntent();
@@ -63,12 +68,26 @@ public class UpdateNote extends AppCompatActivity {
             //setup update
 
             update_note_btn.setOnClickListener(view -> {
-                int id = noteId;
+                long id = noteId;
                 String noteTitle = note_title.getText().toString().trim();
                 String noteDes = note_description.getText().toString().trim();
-
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                if (TextUtils.isEmpty(noteDes) && TextUtils.isEmpty(noteDes)) {
+                    Snackbar.make(note_description, R.string.empty, Snackbar.LENGTH_LONG)
+                            .show();
+                }else {
+                    Note note = new Note();
+                    note.setId(id);
+                    note.setNoteTitle(noteTitle);
+                    note.setNoteDescription(noteDes);
+                    note.setTimestamp(timestamp);
+                    NoteViewModel.updateNote(note);
+                    finish();
+                }
             });
-
+            if(isUpdate)
+                save_note_btn.setVisibility(View.GONE);
+            else
+                update_note_btn.setVisibility(View.GONE);
         }
-    }
 }

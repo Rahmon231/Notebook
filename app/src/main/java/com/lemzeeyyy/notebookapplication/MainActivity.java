@@ -93,9 +93,15 @@ public class MainActivity extends AppCompatActivity implements OnNoteClickListen
 
     @Override
     public void onNoteClick(int position, Note note) {
-        Log.d("TAG", "onNoteClick: "+note.getNoteTitle());
         Intent intent = new Intent(MainActivity.this, UpdateNote.class);
         intent.putExtra(NOTE_ID,note.getId());
+        Log.d("TAGNote", "onNoteClick: "+note.getId());
         startActivity(intent);
+    }
+
+    @Override
+    public void deleteClick(int position, Note note) {
+        Log.d("delete", "deleteClick: "+note);
+        NoteViewModel.deleteNote(note);
     }
 }

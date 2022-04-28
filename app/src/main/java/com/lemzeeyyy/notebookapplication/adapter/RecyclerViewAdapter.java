@@ -1,8 +1,10 @@
 package com.lemzeeyyy.notebookapplication.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,21 +47,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView note_title;
         private TextView time_stamp;
+        private ImageView delete_btn;
         OnNoteClickListener noteClickListener;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             note_title = itemView.findViewById(R.id.row_note_title);
             time_stamp = itemView.findViewById(R.id.row_time_stamp);
+            delete_btn = itemView.findViewById(R.id.delete_btn);
             this.noteClickListener = onNoteClickListener;
-            itemView.setOnClickListener(this::onClick);
+            note_title.setOnClickListener(this);
+            delete_btn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             Note currentNote = noteList.get(getAdapterPosition());
             int id = view.getId();
-            if(id == R.id.note_row){
+            if(id == R.id.row_note_title){
                 onNoteClickListener.onNoteClick(getAdapterPosition(),currentNote);
+            }else if(id == R.id.delete_btn){
+                onNoteClickListener.deleteClick(getAdapterPosition(),currentNote);
             }
 
         }

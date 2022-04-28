@@ -26,7 +26,10 @@
                 android:id="@+id/row_note_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/general_margin"
+                android:layout_marginStart="@dimen/general_margin"
+                android:layout_marginTop="@dimen/general_margin"
+                android:layout_marginEnd="@dimen/general_margin"
+                android:layout_marginBottom="@dimen/general_margin"
                 android:gravity="center"
                 android:padding="@dimen/general_padding"
                 android:text="Note Title"
@@ -47,6 +50,22 @@
                 android:padding="@dimen/general_padding"
                 android:text="TimeStamp"
                 android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dimen_16"
+                android:paddingTop="25dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/ic_baseline_delete_24"
+               />
+
         </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
