@@ -14,7 +14,7 @@
         android:textColorHint="@color/white"
         android:layout_height="90dp"
         android:elevation="0dp"
-        android:hint="New Note"
+        android:hint="Note Title"
         android:padding="@dimen/general_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

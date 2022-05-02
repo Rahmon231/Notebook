@@ -1,9 +1,8 @@
 package com.lemzeeyyy.notebookapplication.data;
 
 import android.app.Application;
-
+import android.media.MediaPlayer;
 import androidx.lifecycle.LiveData;
-
 import com.lemzeeyyy.notebookapplication.model.Note;
 import com.lemzeeyyy.notebookapplication.util.NoteRoomDatabase;
 
@@ -11,12 +10,14 @@ import java.util.List;
 
 public class NoteRepository {
     private NoteDao noteDao;
+    private MediaPlayer mediaPlayer;
     LiveData<List<Note>> allNotes;
 
     public NoteRepository(Application application) {
         NoteRoomDatabase noteRoomDatabase = NoteRoomDatabase.getDatabase(application);
         noteDao = noteRoomDatabase.noteDao();
         allNotes = noteDao.getAllNotes();
+
     }
 
     public LiveData<List<Note>> getAllData(){
@@ -25,6 +26,7 @@ public class NoteRepository {
 
     public void insertNote(Note note){
         NoteRoomDatabase.databaseWriteExecutor.execute(()->{
+
             noteDao.insertNote(note);
         });
     }

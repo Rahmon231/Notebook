@@ -50,6 +50,15 @@
                 android:padding="@dimen/general_padding"
                 android:text="TimeStamp"
                 android:textColor="@color/white" />
+            <ImageView
+                android:id="@+id/share_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_16"
+                android:paddingTop="25dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/ic_baseline_share_24"
+                />
 
             <ImageView
                 android:id="@+id/delete_btn"

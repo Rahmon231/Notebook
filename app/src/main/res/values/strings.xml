@@ -2,4 +2,5 @@
     <string name="app_name">Notebook Application</string>
     <string name="action_settings">About</string>
     <string name="empty">Field Empty</string>
+    <string name="about">Notebook app v1.0 _ developed by lemzy</string>
 </resources>
