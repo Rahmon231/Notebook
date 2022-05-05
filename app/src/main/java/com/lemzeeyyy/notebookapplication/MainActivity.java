@@ -109,4 +109,13 @@ public class MainActivity extends AppCompatActivity implements OnNoteClickListen
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+    @Override
+    public void shareClick(int position, Note note) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT,note.getNoteTitle());
+        intent.putExtra(Intent.EXTRA_TEXT,note.getNoteDescription());
+        startActivity(intent);
+    }
 }

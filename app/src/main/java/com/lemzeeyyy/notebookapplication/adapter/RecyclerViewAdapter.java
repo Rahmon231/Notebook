@@ -48,15 +48,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView note_title;
         private TextView time_stamp;
         private ImageView delete_btn;
+        private ImageView share_btn;
         OnNoteClickListener noteClickListener;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             note_title = itemView.findViewById(R.id.row_note_title);
             time_stamp = itemView.findViewById(R.id.row_time_stamp);
             delete_btn = itemView.findViewById(R.id.delete_btn);
+            share_btn = itemView.findViewById(R.id.share_btn);
             this.noteClickListener = onNoteClickListener;
             note_title.setOnClickListener(this);
             delete_btn.setOnClickListener(this);
+            share_btn.setOnClickListener(this);
         }
 
         @Override
@@ -67,6 +70,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 onNoteClickListener.onNoteClick(getAdapterPosition(),currentNote);
             }else if(id == R.id.delete_btn){
                 onNoteClickListener.deleteClick(getAdapterPosition(),currentNote);
+            }else if(id == R.id.share_btn){
+                onNoteClickListener.shareClick(getAdapterPosition(),currentNote);
             }
 
         }
