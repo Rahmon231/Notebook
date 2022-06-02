@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnNoteClickListen
         Log.d("position", "onNoteClick: "+position);
         Intent intent = new Intent(MainActivity.this, UpdateNote.class);
         intent.putExtra(NOTE_ID,note.getId());
-        Log.d("TAGNote", "onNoteClick: "+position);
+        //Log.d("TAGNote", "onNoteClick: "+position);
         startActivity(intent);
     }
 
@@ -104,7 +105,12 @@ public class MainActivity extends AppCompatActivity implements OnNoteClickListen
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Delete Note")
                 .setMessage("Do you want to delete this note?")
-                .setPositiveButton("Delete", (dialogInterface, i) -> NoteViewModel.deleteNote(note))
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        NoteViewModel.deleteNote(note);
+                    }
+                })
                 .setNegativeButton("Cancel",null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
@@ -118,4 +124,5 @@ public class MainActivity extends AppCompatActivity implements OnNoteClickListen
         intent.putExtra(Intent.EXTRA_TEXT,note.getNoteDescription());
         startActivity(intent);
     }
+
 }

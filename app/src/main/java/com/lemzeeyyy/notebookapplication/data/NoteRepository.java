@@ -10,7 +10,6 @@ import java.util.List;
 
 public class NoteRepository {
     private NoteDao noteDao;
-    private MediaPlayer mediaPlayer;
     LiveData<List<Note>> allNotes;
 
     public NoteRepository(Application application) {

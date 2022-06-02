@@ -13,7 +13,6 @@ import com.lemzeeyyy.notebookapplication.data.NoteRepository;
 import java.util.List;
 
 public class NoteViewModel extends AndroidViewModel {
-    private MediaPlayer mediaPlayer;
     public static NoteRepository repository;
     public final LiveData<List<Note>> allNotes;
     public NoteViewModel(@NonNull Application application) {
@@ -22,7 +21,6 @@ public class NoteViewModel extends AndroidViewModel {
         allNotes = repository.getAllData();
     }
     public LiveData<List<Note>> getAllNotes(){
-
         return allNotes;
     }
     public LiveData<Note> getNote(long id){
